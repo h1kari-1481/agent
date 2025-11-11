@@ -1,0 +1,22 @@
+{
+  "execution_mode": "sequential",
+  "enable_repair": false,
+  "backup_files": true,
+  "max_retries": 2,
+  "timeout_multiplier": 1.5,
+  "agents": {
+    "project_analyzer": {
+      "enabled": true,
+      "timeout": 600
+    },
+    "vulnerability_detector": {
+      "enabled": true,
+      "timeout": 300
+    },
+    "vulnerability_repair": {
+      "enabled": true,
+      "timeout": 600,
+      "auto_apply": false
+    }
+  }
+}
