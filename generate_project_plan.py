@@ -120,18 +120,18 @@ def make_gantt():
         ax.text(s + dur + 0.3, n - i - 0.45, f'{dur}d',
                 va='center', ha='left', fontsize=7.5, color='#333333')
 
-    # Milestone diamonds
-    milestone_rows = {
-        '2026-04-28': 2,   # row for 需求分析
-        '2026-05-06': 4,   # 系统设计
-        '2026-05-27': 6,   # 编码实现
-        '2026-06-06': 8,   # 测试
-        '2026-06-10': 9,   # 部署
-        '2026-06-13': 10,  # 验收
+    # Milestone diamonds — explicit row mapping (task index in TASKS list)
+    milestone_task_index = {
+        '2026-04-28': 0,   # 需求分析 (index 0)
+        '2026-05-06': 3,   # 系统设计 (index 3)
+        '2026-05-27': 6,   # 编码实现 (index 6)
+        '2026-06-06': 12,  # 测试     (index 12)
+        '2026-06-10': 15,  # 部署上线 (index 15)
+        '2026-06-13': 16,  # 验收     (index 16)
     }
     for mid, mdesc, mdate in MILESTONES:
         x = days(ref, d(mdate))
-        row_i = next((i for i, t in enumerate(TASKS) if t[2] <= mdate <= t[3] and t[4] == 1), 0)
+        row_i = milestone_task_index.get(mdate, 0)
         y = n - row_i - 0.45
         ax.plot(x + 1, y, 'D', color='red', markersize=8, zorder=5)
         ax.text(x + 1.5, y + 0.15, f'{mid}', fontsize=7.5, color='red', fontweight='bold')
